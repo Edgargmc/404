@@ -91,3 +91,5 @@ docs/api/
 # DotEnv
 
 .env
+
+build/*

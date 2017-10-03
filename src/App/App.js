@@ -45,15 +45,13 @@ class App extends Component {
 
             })
             .catch((error) =>{
-                    console.log(error);
+                console.log(error);
                 this.setState({
                     showloader:false,
                     showError:true
                 });
             });
     }
-
-
 
     _renderTvShow = () =>{
         return(
@@ -93,7 +91,6 @@ class App extends Component {
         )
     };
 
-
     handlePageChange = (pageNumber) => {
         this.setState({showloader:true});
         this.setState({activePage: pageNumber});
@@ -104,6 +101,19 @@ class App extends Component {
         this.getTvShow(this.state.activePage);
         this.setState({showError: false});
     };
+
+    _renderPagination = () => {
+        return(
+            <Pagination
+                activePage={this.state.activePage}
+                itemsCountPerPage={20}
+                totalItemsCount={this.state.totalItems-20}
+                pageRangeDisplayed={5}
+                onChange={this.handlePageChange}
+            />
+        )
+    };
+
     render() {
         return (
             <div className="App">
@@ -114,13 +124,9 @@ class App extends Component {
                         <Row className="show-grid">
                             <div>
                                 {this.state.tvshows.length  > 0 ?
-                                    <Pagination
-                                        activePage={this.state.activePage}
-                                        itemsCountPerPage={20}
-                                        totalItemsCount={this.state.totalItems-20}
-                                        pageRangeDisplayed={5}
-                                        onChange={this.handlePageChange}
-                                    />
+                                    <div>
+                                        {this._renderPagination()}
+                                    </div>
                                     : null
                                 }
                             </div>
@@ -141,13 +147,9 @@ class App extends Component {
                         </Row>
                         <div>
                             {this.state.tvshows.length  > 0 ?
-                                <Pagination
-                                    activePage={this.state.activePage}
-                                    itemsCountPerPage={20}
-                                    totalItemsCount={this.state.totalItems-20}
-                                    pageRangeDisplayed={5}
-                                    onChange={this.handlePageChange}
-                                />
+                                <div>
+                                    {this._renderPagination()}
+                                </div>
                                 : null
                             }
                         </div>
